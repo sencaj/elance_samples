@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset='utf-8'/>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/common/main.css">
+        <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="vendor/raty/jquery.raty.css" rel="stylesheet">
+        <title>Project Samples</title>
+        <style type="text/css">
+            .com {
+                color: #93a1a1;
+            }
+
+            .lit {
+                color: #195f91;
+            }
+
+            .pun, .opn, .clo {
+                color: #93a1a1;
+            }
+
+            .fun {
+                color: #dc322f;
+            }
+
+            .str, .atv {
+                color: #D14;
+            }
+
+            .kwd, .prettyprint .tag {
+                color: #1e347b;
+            }
+
+            .typ, .atn, .dec, .var {
+                color: teal;
+            }
+
+            .pln {
+                color: #48484c;
+            }
+
+            .prettyprint {
+                padding: 8px;
+                background-color: #f7f7f9;
+                border: 1px solid #e1e1e8;
+            }
+
+            .prettyprint.linenums {
+                -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+                -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+                box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+            }
+
+            /* Specify class=linenums on a pre to get line numbering */
+            ol.linenums {
+                margin: 0 0 0 33px; /* IE indents via margin-left */
+            }
+
+            ol.linenums li {
+                padding-left: 12px;
+                color: #bebec5;
+                line-height: 20px;
+                text-shadow: 0 1px 0 #fff;
+            }
+
+            .special {
+                font-style: italic;
+                font-weight: bold !important;
+                color: #bc0000 !important;
+                background: #000;
+            }
+            
+            .sequence, .results {
+                list-style-type:none;
+                margin-bottom:0px;
+                padding-top:5px
+            }
+            
+            .sequence li, .results li {
+                float:left;
+                width:100px;
+            }
+            
+            .sequence li h2, .results li h2 {
+                text-align:center;
+                margin-top:0px;
+                margin-bottom:0px;
+            }
+            
+            .sequence hr{
+                padding:5px;
+            }
+            
+            .result {
+                border:1px red solid;
+                margin-top:50px;
+            }
+            
+            .results li h2 {
+                color:green;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+                <a id="forkme_banner" href="https://github.com/silviomoreto/bootstrap-select">View on GitHub</a>
+                <h1 id="project_title">Project Samples</h1>
+            </header>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+
+                <section id="content_example">
+                    <h2 id="example">Accepting user input by touch and tiles</h2>
+                    <div class="bs-docs-example">
+                        <ul id="selectable">
+                          <li class="ui-widget-content" data-answerid="1">ones</li>
+                          <li class="ui-widget-content" data-answerid="2">tens</li>
+                          <li class="ui-widget-content" data-answerid="3">hundreds</li>
+                          <li class="ui-widget-content" data-answerid="4">thousands</li>
+                        </ul>
+                    </div>
+                    <pre class="prettyprint linenums">
+  &lt;select class="selectpicker"&gt;
+    &lt;option&gt;Mustard&lt;/option&gt;
+    &lt;option&gt;Ketchup&lt;/option&gt;
+    &lt;option&gt;Relish&lt;/option&gt;
+  &lt;/select&gt;
+  
+  &lt;script&gt;
+    $('#selectable').selectable();
+    $('#selectable li.ui-widget-content').click(function() {
+        var ids = $('#selectable .ui-selected').map(function() {
+            return $(this).data('answerid');
+        });
+        alert('answerid ' + ids.toArray().join(','));
+    });
+  &lt;/script&gt;
+                    </pre>
+                </section>
+                
+                <section>
+                    <h2 id="example">Accepting user input on image and calculating value</h2>
+
+                    <div class="bs-docs-example" style="height:120px;padding-top:50px;">
+                        <div id="rating1" class="rating"></div>
+                        <div id="rating2" class="rating" data-score="1"></div>
+                        <div id="rating3" class="rating"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <pre class="prettyprint linenums">
+&lt;div id="rating1" class="rating"&gt;&lt;/div&gt;
+&lt;div id="rating2" class="rating" data-score="1"&gt;&lt;/div&gt;
+&lt;div id="rating2" class="rating" data-score="1"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+$('#rating1').raty();
+$('#rating2').raty({
+    number: 4,
+    score: function() {
+        return $(this).attr('data-score');
+    }
+});
+                
+$('#rating3').raty({
+    half : true,
+    number: 7
+});
+&lt;/script&gt;
+                    </pre>
+                    
+                </section>
+                
+                <section>
+                    <h2 id="example">Accepting user input on background images with logic</h2>
+
+                    <div class="bs-docs-example">
+                        <div id="graph" style="width: 100%; height: 600px;"></div>
+                    </div>
+                    <pre class="prettyprint linenums">
+&lt;script&gt;
+$(function () {
+    
+    $('#graph').svg();
+    var svg = $('#graph').svg("get");
+    var parentOffset, relX, relY;
+    var stage = $('#graph');
+
+    var chartAreas = [[0.1, 0.1, 0.95, 0.9], [0.2, 0.1, 0.95, 0.9],
+        [0.1, 0.1, 0.8, 0.9], [0.1, 0.25, 0.9, 0.9], [0.1, 0.1, 0.9, 0.8]];
+    var legendAreas = [[0.0, 0.0, 0.0, 0.0], [0.005, 0.1, 0.125, 0.5],
+        [0.85, 0.1, 0.97, 0.5], [0.2, 0.1, 0.8, 0.2], [0.2, 0.9, 0.8, 0.995]];
+    var fills = [['lightblue', 'url(#fadeBlue)'], ['pink', 'url(#fadeRed)'],
+        ['lightgreen', 'url(#fadeGreen)']];
+
+    var defs = svg.defs();
+
+    svg.linearGradient(defs, 'fadeBlue',
+            [[0, 'lightblue'], [1, 'blue']]);
+    svg.linearGradient(defs, 'fadeRed', [[0, 'pink'], [1, 'red']]);
+    svg.linearGradient(defs, 'fadeGreen',
+            [[0, 'lightgreen'], [1, 'green']]);
+    svg.graph.noDraw().title('Browser Usage', 'blue').
+            addSeries('IE', [95.97, 35.39, 15.00],
+                    'lightblue', 'blue', 3).
+            addSeries('Netscape', [63.80, 42.83, 23.06],
+                    'pink', 'red', 3).
+            addSeries('Firefox', [76.16, 33.61, 13.13],
+                    'lightgreen', 'green', 3).
+            format('ivory', 'gray').
+            gridlines({stroke: 'gray', strokeDashArray: '2,2'}, 'gray');
+    svg.graph.xAxis.title('Year', 'green').scale(0, 3).
+            ticks(1, 0).labels(['2002', '2004', '2005', '2006']);
+    svg.graph.yAxis.title('Percentage').ticks(10, 5);
+    svg.graph.legend.settings({fill: 'lightgoldenrodyellow',
+        stroke: 'gray'});
+    svg.graph.status(showGraphStatus);
+
+    function showGraphStatus(label, value) {
+        $('#graph').attr('title', (label ? label + ' ' + value : ''));
+    }
+
+    var chartType = "column";
+    var chartLegend = parseInt(0, 10);
+    var seriesFill = 0;
+    var svg = $('#graph').svg('get');
+    svg.graph.noDraw().
+            legend.show(chartLegend).area(legendAreas[chartLegend]).end().
+            series(0).format(fills[0][seriesFill]).end().
+            series(1).format(fills[1][seriesFill]).end().
+            series(2).format(fills[2][seriesFill]).end().
+            area(chartAreas[chartLegend]).
+            type(chartType, {explode: 2, explodeDist: 10}).redraw();
+    chartType = $.svg.graphing.chartTypes()[chartType];
+    $('#graphDesc').text(chartType.description());
+    var options = '';
+    for (var i = 0; i < chartType.options().length; i++) {
+        options += '<li>' + chartType.options()[i] + '</li>';
+    }
+    $('#graphOptions').html(options || '<li>None</li>');
+    // resetSize(svg);
+
+    var $graphStage = $('#graph svg svg');
+    var $rect = $('#graph rect');
+
+    $graphStage.mousemove(function (e) {
+        parentOffset = $(this).offset();
+        relX = e.pageX - parentOffset.left - 100;
+        relY = e.pageY - parentOffset.top;
+        var rn = Math.abs(Math.floor(relX / (stage.width() / 4)));
+        var sn = Math.abs(Math.floor(relX % (stage.width() / 4) / 50));
+
+        updateRect(sn, rn);
+    });
+
+    $rect.mousedown(function () {
+        alert("Rect height = " + Math.round($(this).attr('height') / (480 / 100)));
+    });
+
+    function updateRect(sn, rn) {
+        var h = stage.height() - relY - 60;
+        var o = (h % 48 > 24) ? (h % 48 + 24) : (h % 48);
+        if (h < 480) {
+            $(stage.find('.series' + sn).find('rect')[rn])
+                    .attr("y", relY)
+                    .attr("height", h);
+        }
+    };
+});
+&lt;/script&gt;
+                    </pre>
+
+                </section>
+                
+                <section>
+                    
+                    <h2 id="example">Sequencing the items</h2>
+
+                    <div class="bs-docs-example">
+                        <div id="plot" style="width: 100%; height: 600px;"></div>
+                    </div>
+                    <pre class="prettyprint linenums">
+&lt;script&gt;
+  var chartAreas = [[0.1, 0.1, 0.95, 0.9], [0.2, 0.1, 0.95, 0.9],
+        [0.1, 0.1, 0.8, 0.9], [0.1, 0.25, 0.9, 0.9], [0.1, 0.1, 0.9, 0.8]];
+    var legendAreas = [[0.0, 0.0, 0.0, 0.0], [0.005, 0.1, 0.125, 0.5],
+        [0.85, 0.1, 0.97, 0.5], [0.2, 0.1, 0.8, 0.2], [0.2, 0.9, 0.8, 0.995]];
+    var fills = [['lightblue', 'url(#fadeBlue)'], ['pink', 'url(#fadeRed)'],
+        ['lightgreen', 'url(#fadeGreen)']];
+    
+    var chartType = "column";
+    var chartLegend = parseInt(0, 10);
+    var seriesFill = 0;
+    var svg = $('#plot').svg().svg('get');
+    var chartType = "line";
+    var sPoints = [[75, 500]];
+    var dPoints = [];
+    var column;
+    
+    svg.graph.noDraw().addSeries('IE', [], 'lightblue', 'blue', 3).
+            addSeries('Netscape', [], 'pink', 'red', 3).
+            addSeries('Firefox', [], 'lightgreen', 'green', 3).
+            format('ivory', 'gray').
+            gridlines({stroke: 'gray', strokeDashArray: '2,2'}, 'gray');
+    svg.graph.xAxis.title('Year', 'green').scale(0, 3).
+            ticks(0.5, 0).labels(['2002', '2004', '2005', '2006', '2007', '2008', '2009']);
+    svg.graph.yAxis.title('Percentage').ticks(10, 5);
+    svg.graph.noDraw().
+            legend.show(chartLegend).area(legendAreas[chartLegend]).end().
+            series(0).format(fills[0][seriesFill]).end().
+            series(1).format(fills[1][seriesFill]).end().
+            series(2).format(fills[2][seriesFill]).end().
+            area(chartAreas[chartLegend]).
+            type(chartType, {explode: 2, explodeDist: 10}).redraw();
+    chartType = $.svg.graphing.chartTypes()[chartType];
+    svg.circle(-100,500, 5, {fill: 'red', stroke: 'blue', strokeWidth: 2});
+    
+    var $plot = $("#plot");
+    var $plotStage = $('#plot svg g.background');
+    var $circle = $plot.find("circle");
+    var $sPoly = $plot.find("polyline.solid");
+    var $dPoly = $plot.find("polyline.dashed");
+    
+    $plotStage.mousemove(function (e) {
+        
+        $circle = $plot.find("circle");
+        $sPoly = $plot.find("polyline.solid");
+        $dPoly = $plot.find("polyline.dashed");
+        
+        parentOffset = $(this).offset();
+        relX = e.pageX - parentOffset.left;
+        relY = e.pageY - parentOffset.top;
+
+        var mx = relX % 111;
+        var my = relY % 48;
+
+        relX = (mx > 55) ? relX + (111 - mx) : relX - mx;
+        relY = (my > 24) ? relY + (48 - my) : relY - my;
+
+        column = Math.round(relX / 111);
+        if (sPoints.length >= column) {
+            drawDashedPoly();
+            drawCircle();
+        }
+    });
+
+    $plotStage.mouseleave(function (e) {
+        $circle.remove();
+        $dPoly.remove();
+    });
+
+    $plotStage.mousedown(function (e) {
+        if (sPoints.length >= column) {
+            sPoints[column] = [relX + 75, relY + 60];
+            drawSolidPoly();
+        }
+    });
+
+    function drawCircle() {
+        $circle.remove();
+        svg.circle(relX + 75, relY + 60, 5, {fill: 'red', stroke: 'blue', strokeWidth: 2});
+    };
+
+    function drawSolidPoly() {
+        $sPoly.remove();
+        svg.polyline(sPoints, {fill: 'none', stroke: 'blue', strokeWidth: 5, class: 'solid'});
+    };
+
+    function drawDashedPoly() {
+        $dPoly.remove();
+        dPoints = sPoints.slice();
+        dPoints[column] = [relX + 75, relY + 60];
+        svg.polyline(dPoints, {class: "dashed", style: "fill:none;stroke:black;stroke-width:2;stroke-dasharray:5,5;d:M5 20 l215 0"});
+        drawSolidPoly();
+    };
+&lt;/script&gt;
+                    </pre>
+                    
+                </section>
+                
+                <section>
+                    
+                    <h2 id="example">Sequencing the items</h2>
+
+                    <div class="bs-docs-example">
+                        <ul class="sequence clearfix">
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                        </ul>
+                        <hr/>
+                        <ul class="results clearfix">
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                            <li><h2></h2></li>
+                        </ul>
+                    </div>
+                    <pre class="prettyprint linenums">
+&lt;script&gt;
+var arr = {};
+for(var i=0; i<5; i++)
+arr[i] = Math.round(Math.random()*100);
+
+var x;
+for(var i=0; i<5; i++) {
+    for(var j=5; j>i; --j) {
+        if(arr[j] > arr[i]){
+            x = arr[i];
+            arr[i] = arr[j];
+            arr[j] = x;
+        }
+    }
+}
+&lt;/script&gt;
+                    </pre>
+                    
+                </section>
+        </div>
+
+        <!-- FOOTER  -->
+        <div id="footer_wrap" class="outer">
+            <footer class="inner">&nbps;</footer>
+        </div>
+
+        <script src="vendor/jquery/jquery-2.1.1.min.js"></script>
+        <script src="vendor/bootstrap/bootstrap.min.js"></script>
+        <script src="vendor/jquery/jquery-ui.min.js"></script>
+        <script src="vendor/prettify/prettify.js"></script>
+        <script src="vendor/raty/jquery.raty.js"></script>
+        <script src="vendor/jquery/jquery.svg.js"></script>
+        <script src="vendor/jquery/jquery.svggraph.js"></script>
+        <script src="vendor/jquery/jquery.svgplot.js"></script>
+        <script src="js/example1.js"></script>
+        <script src="js/example2.js"></script>
+        <script src="js/example3.js"></script>
+        <script src="js/example4.js"></script>
+        <script src="js/example5.js"></script>
+        
+        <script type="text/javascript">
+            $(function() {
+                prettyPrint();
+            });
+        </script>
+        
+    </body>
+</html>
